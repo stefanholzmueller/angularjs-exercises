@@ -13,43 +13,43 @@ module.factory('PhoneticService', [ function() {
 		din : function(raw) {
 			var array = raw.split("");
 			var characters = _.map(array, function(char) {
-				return char.toUpperCase();
+				return char.toLowerCase();
 			});
 
 			var mapping = {
-				"A" : "Anton",
-				"Ä" : "Ärger",
-				"B" : "Berta",
-				"C" : "Cäsar",
+				"a" : "Anton",
+				"ä" : "Ärger",
+				"b" : "Berta",
+				"c" : "Cäsar",
 				// Ch : "Charlotte",
-				"D" : "Dora",
-				"E" : "Emil",
-				"F" : "Friedrich",
-				"G" : "Gustav",
-				"H" : "Heinrich",
-				"I" : "Ida",
-				"J" : "Julius",
-				"K" : "Kaufmann",
-				"L" : "Ludwig",
-				"M" : "Martha",
-				"N" : "Nordpol",
-				"O" : "Otto",
-				"Ö" : "Ökonom",
-				"P" : "Paula",
-				"Q" : "Quelle",
-				"R" : "Richard",
-				"S" : "Samuel",
+				"d" : "Dora",
+				"e" : "Emil",
+				"f" : "Friedrich",
+				"g" : "Gustav",
+				"h" : "Heinrich",
+				"i" : "Ida",
+				"j" : "Julius",
+				"k" : "Kaufmann",
+				"l" : "Ludwig",
+				"m" : "Martha",
+				"n" : "Nordpol",
+				"o" : "Otto",
+				"ö" : "Ökonom",
+				"p" : "Paula",
+				"q" : "Quelle",
+				"r" : "Richard",
+				"s" : "Samuel",
 				// "S" : "Siegfried",
 				// Sch : "Schule",
 				"ß" : "Eszett",
-				"T" : "Theodor",
-				"U" : "Ulrich",
-				"Ü" : "Übermut",
-				"V" : "Viktor",
-				"W" : "Wilhelm",
-				"X" : "Xanthippe",
-				"Y" : "Ypsilon",
-				"Z" : "Zacharias"
+				"t" : "Theodor",
+				"u" : "Ulrich",
+				"ü" : "Übermut",
+				"v" : "Viktor",
+				"w" : "Wilhelm",
+				"x" : "Xanthippe",
+				"y" : "Ypsilon",
+				"z" : "Zacharias"
 			// "Z" : "Zeppelin"
 			};
 
