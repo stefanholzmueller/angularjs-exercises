@@ -11,11 +11,6 @@ module.controller('PhoneticController', [ '$scope', 'PhoneticService', function(
 module.factory('PhoneticService', [ function() {
 	return {
 		din : function(raw) {
-			var array = raw.split("");
-			var characters = _.map(array, function(char) {
-				return char.toLowerCase();
-			});
-
 			var mapping = {
 				"a" : "Anton",
 				"ä" : "Ärger",
@@ -53,11 +48,12 @@ module.factory('PhoneticService', [ function() {
 			// "Z" : "Zeppelin"
 			};
 
-			var eligible = _.filter(characters, function(char) {
+			var chars = raw.split("");
+			return _.map(chars, function(char) {
+				return char.toLowerCase();
+			}).filter(function(char) {
 				return mapping.hasOwnProperty(char);
-			});
-
-			return _.map(eligible, function(char) {
+			}).map(function(char) {
 				return mapping[char];
 			});
 		}
