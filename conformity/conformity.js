@@ -2,39 +2,17 @@
 
 var module = angular.module('conformity', []);
 
-module.controller('ConformityController', [ '$scope', function($scope) {
-	$scope.spectrum = [ {
-		points : -2,
-		text : "entschieden dagegen"
-	}, {
-		points : -1,
-		text : "eher dagegen"
-	}, {
-		points : 0,
-		text : "egal"
-	}, {
-		points : 1,
-		text : "eher dafür"
-	}, {
-		points : 2,
-		text : "entschieden dafür"
-	} ];
-	$scope.questions = [ "Soll der Veggie-Day eingeführt werden?", "Steuern senken?", "Aus der NATO austreten?" ];
-	$scope.positions = {
-		"CDU/CSU" : [ -2, 1, -2 ],
-		"SPD" : [ -2, -1, -1 ],
-		"Grüne" : [ 2, -2, -1 ],
-		"FDP" : [ -2, 2, -2 ],
-		"Linke" : [ -1, -2, 2 ],
-		"Piraten" : [ -2, 0, 1 ]
-	};
-
+module.controller('ConformityController', [ '$scope', 'questionnaire', function($scope, questionnaire) {
+	$scope.spectrum = questionnaire.spectrum;
+	$scope.questions = questionnaire.questions;
+	$scope.positions = questionnaire.positions;
+	
 	$scope.answers = [];
 	$scope.currentQuestion = 0;
 
 	$scope.vote = function(points) {
 		$scope.answers[$scope.currentQuestion] = points;
-		$scope.currentQuestion = ++$scope.currentQuestion % $scope.questions.length;
+		$scope.currentQuestion = ($scope.currentQuestion + 1) % $scope.questions.length;
 	};
 
 	$scope.calc = function(position) {
