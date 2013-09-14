@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html ng-app>
+<html ng-app="conformity">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <!-- <title></title> -->
@@ -11,10 +11,14 @@
 <body ng-controller="ConformityController">
 	<h3>Frage {{currentQuestion + 1}} von {{questions.length}}:</h3>
 	<h2>{{questions[currentQuestion]}}</h2>
-	<p ng-repeat="(points, text) in spectrum">
-		<label><input type="radio" name="vote" ng-click="vote(points)">{{text}}</label>
+	<p ng-repeat="s in spectrum">
+		<input type="button" value="{{s.text}}" ng-click="vote(s.points)">
 	</p>
-	
-	answer = {{answer | json}}
+
+	<h3>Deine Antworten:</h3>
+	<p ng-repeat="a in answers">{{questions[$index]}} {{textForPoints(a)}} ({{a}})</p>
+
+	<h3>Übereinstimmung mit:</h3>
+	<p ng-repeat="(position, x) in positions">{{position}} {{calc(position) | percentage}}</p>
 </body>
 </html>
