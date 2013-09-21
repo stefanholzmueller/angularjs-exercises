@@ -21,14 +21,27 @@ module.controller('SequencesController', [ '$scope', 'numberOfPuzzles', 'numberO
 
 module.factory('SequencesFactory', [ 'RandomService', function(random) {
 	return {
-		x : function() {
+		lin : function() {
+			var a = _.random(1, 6);
+			var b = _.random(-10);
 			return function(x) {
-				return x;
+				return a * x + b;
 			};
 		},
-		x2 : function() {
+		exp : function() {
+			var exp = _.random(1, 3);
+			var offset = _.random(0, 1);
 			return function(x) {
-				return x * x;
+				return Math.pow(x + offset, exp);
+			};
+		},
+		fib : function() {
+			function fibonacci(n) {
+				return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+			}
+			var offset = _.random(1, 5);
+			return function(x) {
+				return fibonacci(x + offset);
 			};
 		}
 	};
