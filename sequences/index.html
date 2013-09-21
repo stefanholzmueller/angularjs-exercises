@@ -1,0 +1,18 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="sequences">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<!-- <title></title> -->
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js" type="text/javascript"></script>
+<script src="http://code.angularjs.org/1.0.8/angular.min.js" type="text/javascript"></script>
+<script src="app.js" type="text/javascript"></script>
+</head>
+<body ng-controller="SequencesController">
+	<h2>Guess the next number!</h2>
+	<div ng-repeat="s in sequences">
+		<span ng-repeat="i in given">
+			{{i}}
+		</span>
+	</div>
+</body>
+</html>
