@@ -1,0 +1,14 @@
+.cell {
+	width: 48px;
+	height: 48px;
+	display: inline-block;
+	text-align: center;
+}
+
+.correct {
+	background-color: #44ff44;
+}
+
+.wrong {
+	background-color: #ff4444;
+}
