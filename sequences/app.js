@@ -10,7 +10,9 @@ module.controller('SequencesController', [ '$scope', 'numberOfPuzzles', 'numberO
 	$scope.puzzles = _.range(numberOfPuzzles);
 	$scope.given = _.range(numberOfGivenElements);
 
-	$scope.sequences = factory.batch(numberOfPuzzles);
+	$scope.sequences = _.range(numberOfPuzzles).map(function(p) {
+		return _.sample(_.values(factory))();
+	});
 
 	$scope.check = function(i) {
 		return $scope.guesses[i] == $scope.sequences[i](numberOfGivenElements);
@@ -19,17 +21,15 @@ module.controller('SequencesController', [ '$scope', 'numberOfPuzzles', 'numberO
 
 module.factory('SequencesFactory', [ 'RandomService', function(random) {
 	return {
-		x : function(x) {
-			return x;
+		x : function() {
+			return function(x) {
+				return x;
+			};
 		},
-		x2 : function(x) {
-			return x * x;
-		},
-		batch : function(i) {
-			var array = [ this.x, this.x2 ];
-			return _.range(i).map(function(_) {
-				return array[Math.floor(Math.random() * array.length)];
-			});
+		x2 : function() {
+			return function(x) {
+				return x * x;
+			};
 		}
 	};
 } ]);
