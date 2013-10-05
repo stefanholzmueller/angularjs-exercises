@@ -4,11 +4,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Kata #5</title>
 <script src="http://code.angularjs.org/1.0.8/angular.min.js" type="text/javascript"></script>
+<script src="lodash.js" type="text/javascript"></script>
 <script src="app.js" type="text/javascript"></script>
 <link href="index.css" rel="stylesheet">
 </head>
 <body ng-controller="TilesController">
-	<div class="bin" droppable drop="handleDrop()"></div>
+	<div data-ng-repeat="i in _.range(4)" class="bin" droppable drop="handleDrop()"></div>
 	<div class="item" id="item1" draggable></div>
 </body>
 </html>

@@ -1,10 +1,12 @@
 var module = angular.module('tiles', []);
 
 // config start
-module.value('tileSize', 100);
+module.value('tiles', 28);
 // config end
 
-module.controller('TilesController', [ '$scope', 'tileSize', function($scope, tileSize) {
+module.controller('TilesController', [ '$scope', 'tiles', function($scope, tiles) {
+	$scope._ = _; // lodash
+	
 	$scope.handleDrop = function() {
 		alert('Item has been dropped');
 	};
