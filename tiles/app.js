@@ -6,7 +6,7 @@ module.value('tiles', 28);
 
 module.controller('TilesController', [ '$scope', 'tiles', function($scope, tiles) {
 	$scope._ = _; // lodash
-	
+
 	$scope.handleDrop = function() {
 		alert('Item has been dropped');
 	};
@@ -63,8 +63,12 @@ module.directive('droppable', function() {
 
 			el.addEventListener('drop', function(e) {
 				// Stops some browsers from redirecting.
-				if (e.stopPropagation)
+				if (e.preventDefault) {
+					e.preventDefault();
+				}
+				if (e.stopPropagation) {
 					e.stopPropagation();
+				}
 
 				this.classList.remove('over');
 
