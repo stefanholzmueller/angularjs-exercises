@@ -7,7 +7,13 @@ module.value('tiles', 28);
 module.controller('TilesController', [ '$scope', 'tiles', function($scope, tiles) {
 	$scope._ = _; // lodash
 
-	$scope.handleDrop = function() {
+	$scope.handleDrop = function(tile, space) {
+		if (space.children.length > 0) {
+			tile.parentElement.appendChild(space.children[0]);
+			space.appendChild(tile);
+		} else {
+			space.appendChild(tile);
+		}
 		alert('Item has been dropped');
 	};
 } ]);
@@ -21,7 +27,7 @@ module.directive('draggable', function() {
 
 		el.addEventListener('dragstart', function(e) {
 			e.dataTransfer.effectAllowed = 'move';
-			e.dataTransfer.setData('Text', this.id);
+			e.dataTransfer.setData('text', this.id);
 			this.classList.add('drag');
 			return false;
 		}, false);
@@ -36,7 +42,7 @@ module.directive('draggable', function() {
 module.directive('droppable', function() {
 	return {
 		scope : {
-			drop : '&' // parent
+			onDrop : '&' // parent
 		},
 		link : function(scope, element) {
 			// again we need the native object
@@ -72,11 +78,10 @@ module.directive('droppable', function() {
 
 				this.classList.remove('over');
 
-				var item = document.getElementById(e.dataTransfer.getData('Text'));
-				this.appendChild(item);
-
-				// call the drop passed drop function
-				scope.$apply('drop()');
+				scope.onDrop({
+					drag : document.getElementById(e.dataTransfer.getData('text')),
+					drop : this
+				});
 
 				return false;
 			}, false);

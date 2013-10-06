@@ -12,6 +12,9 @@
 	background: blue;
 	float: right;
 }
+#item2 {
+	background: green;
+}
 
 .drag {
 	opacity: 0.5;

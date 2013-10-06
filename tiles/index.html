@@ -9,7 +9,8 @@
 <link href="index.css" rel="stylesheet">
 </head>
 <body ng-controller="TilesController">
-	<div data-ng-repeat="i in _.range(4)" class="bin" droppable drop="handleDrop()"></div>
+	<div data-ng-repeat="i in _.range(4)" class="bin" droppable on-drop="handleDrop(drag, drop)"></div>
 	<div class="item" id="item1" draggable></div>
+	<div class="item" id="item2" draggable></div>
 </body>
 </html>
