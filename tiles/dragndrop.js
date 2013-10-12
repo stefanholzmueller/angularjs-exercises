@@ -8,9 +8,17 @@ module.directive('dragItem', function() {
 		el.draggable = true;
 
 		el.addEventListener('dragstart', function(e) {
+			var style = window.getComputedStyle(event.target, null);
+			var payload = JSON.stringify({
+				id : this.id,
+				x : (parseInt(style.getPropertyValue("left"), 10) - event.clientX),
+				y : (parseInt(style.getPropertyValue("top"), 10) - event.clientY)
+			});
+
 			e.dataTransfer.effectAllowed = 'move';
-			e.dataTransfer.setData('text', this.id);
+			e.dataTransfer.setData('text', payload);
 			this.classList.add('drag');
+
 			return false;
 		}, false);
 
@@ -60,8 +68,10 @@ module.directive('dropArea', function() {
 
 				this.classList.remove('over');
 
+				var payload = JSON.parse(e.dataTransfer.getData('text'));
+
 				scope.onDrop({
-					drag : document.getElementById(e.dataTransfer.getData('text')),
+					drag : document.getElementById(payload.id),
 					drop : this
 				});
 
