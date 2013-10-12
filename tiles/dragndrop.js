@@ -1,24 +1,6 @@
-var module = angular.module('tiles', []);
+var module = angular.module('dragndrop', []);
 
-// config start
-module.value('tiles', 28);
-// config end
-
-module.controller('TilesController', [ '$scope', 'tiles', function($scope, tiles) {
-	$scope._ = _; // lodash
-
-	$scope.handleDrop = function(tile, space) {
-		if (space.children.length > 0) {
-			tile.parentElement.appendChild(space.children[0]);
-			space.appendChild(tile);
-		} else {
-			space.appendChild(tile);
-		}
-		alert('Item has been dropped');
-	};
-} ]);
-
-module.directive('draggable', function() {
+module.directive('dragItem', function() {
 	return function(scope, element) {
 		// this gives us the native JS object
 		var el = element[0];
@@ -39,7 +21,7 @@ module.directive('draggable', function() {
 	};
 });
 
-module.directive('droppable', function() {
+module.directive('dropArea', function() {
 	return {
 		scope : {
 			onDrop : '&' // parent
