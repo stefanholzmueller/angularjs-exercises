@@ -4,14 +4,18 @@ var app = angular.module('tiles', [ 'dragndrop' ]);
 app.value('steamapps', [ {
 	id : 232450,
 	name : "SolForge"
+}, {
+	id : 225340,
+	name : "XCOM - Enemy within"
 } ]);
 // config end
 
 app.controller('TilesController', [ '$scope', 'steamapps', function($scope, steamapps) {
 	$scope._ = _; // lodash
+	$scope.steamapps = steamapps;
 
-	$scope.handleDrop = function(tile, space, left, top) {
-		tile.style.left = left;
-		tile.style.top = top;
+	$scope.moveTile = function(area, item, x, y) {
+		item.style.left = x + "px";
+		item.style.top = y + "px";
 	};
 } ]);

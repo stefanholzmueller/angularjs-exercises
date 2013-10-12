@@ -71,10 +71,10 @@ module.directive('dropArea', function() {
 				var payload = JSON.parse(e.dataTransfer.getData('text'));
 
 				var args = {
-					drag : document.getElementById(payload.id),
-					drop : this,
-					left : ((e.clientX + parseInt(payload.dragX, 10)) + 'px'),
-					top : ((e.clientY + parseInt(payload.dragY, 10)) + 'px')
+					area : this,
+					item : document.getElementById(payload.id),
+					x : (e.clientX + parseInt(payload.dragX, 10)),
+					y : (e.clientY + parseInt(payload.dragY, 10))
 				};
 
 				scope.onDrop(args);

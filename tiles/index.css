@@ -3,7 +3,7 @@ html,body {
 	margin: 0;
 }
 
-.bin {
+[drop-area] {
 	min-height: 100%;
 }
 
