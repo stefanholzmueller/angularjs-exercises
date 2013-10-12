@@ -10,8 +10,9 @@
 <link href="index.css" rel="stylesheet">
 </head>
 <body ng-controller="TilesController">
-	<div data-ng-repeat="i in _.range(4)" class="bin" drop-area on-drop="handleDrop(drag, drop)"></div>
-	<div class="item" id="item1" drag-item></div>
-	<div class="item" id="item2" drag-item></div>
+	<div class="bin" drop-area on-drop="handleDrop(drag, drop, left, top)">
+		<div class="item" id="item1" drag-item></div>
+		<div class="item" id="item2" drag-item></div>
+	</div>
 </body>
 </html>

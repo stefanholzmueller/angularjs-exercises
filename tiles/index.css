@@ -1,19 +1,25 @@
+html,body {
+	height: 100%;
+	margin: 0;
+}
+
 .bin {
-	min-height: 150px;
-	min-width: 150px;
-	float: left;
-	border: 1px solid red;
-	padding: 20px;
+	min-height: 100%;
 }
 
 .item {
 	min-height: 150px;
 	min-width: 150px;
 	background: blue;
-	float: right;
+	position: absolute;
+	left: 123px;
+	top: 456px;
 }
+
 #item2 {
 	background: green;
+	left: 456px;
+	top: 123px;
 }
 
 .drag {
@@ -21,5 +27,4 @@
 }
 
 .over {
-	background: red;
 }
