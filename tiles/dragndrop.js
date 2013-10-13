@@ -31,10 +31,7 @@ module.directive('dragItem', function() {
 
 module.directive('dropArea', function() {
 	return {
-		scope : {
-			onDrop : '&' // parent
-		},
-		link : function(scope, element) {
+		link : function(scope, element, attrs) {
 			// again we need the native object
 			var el = element[0];
 
@@ -77,7 +74,11 @@ module.directive('dropArea', function() {
 					y : (e.clientY + parseInt(payload.dragY, 10))
 				};
 
-				scope.onDrop(args);
+				scope.$apply(function(scope) {
+					var userFnName = attrs['onDrop'];
+					var userFn = scope[userFnName];
+					userFn(args.area, args.item, args.x, args.y);
+				});
 
 				return false;
 			}, false);

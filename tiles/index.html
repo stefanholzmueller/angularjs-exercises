@@ -10,10 +10,8 @@
 <link href="index.css" rel="stylesheet">
 </head>
 <body ng-controller="TilesController">
-	<div drop-area on-drop="moveTile(area, item, x, y)">
-<!-- 		<div ng-repeat="i in steamapps" drag-item id="steamapp{{i.id}}" class="item">{{i.name}}</div> -->
-		<div class="item" id="item1" drag-item></div>
-		<div class="item" id="item2" drag-item></div>
+	<div drop-area on-drop="moveTile">
+		<div ng-repeat="i in steamapps" drag-item id="steamapp{{i.id}}" class="item">{{i.name}}</div>
 	</div>
 </body>
 </html>
