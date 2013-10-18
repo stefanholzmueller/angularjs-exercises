@@ -8,10 +8,18 @@ html,body {
 }
 
 .item {
-	min-height: 150px;
-	min-width: 150px;
-	background: blue;
+	min-height: 200px;
+	min-width: 200px;
+	max-height: 200px;
+	max-width: 200px;
+	background: grey;
 	position: absolute;
+	text-align: center;
+}
+
+.steamlink {
+	display: inline-block;
+	text-align: center;
 }
 
 .drag {
@@ -19,4 +27,5 @@ html,body {
 }
 
 .over {
+	
 }

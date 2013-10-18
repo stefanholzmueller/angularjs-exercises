@@ -7,6 +7,9 @@ app.value('steamapps', [ {
 }, {
 	id : 225340,
 	name : "XCOM - Enemy within"
+}, {
+	id : 200260,
+	name : "Batman: Arkham City - Game of the Year Edition"
 } ]);
 // config end
 

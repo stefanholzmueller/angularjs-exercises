@@ -12,7 +12,12 @@
 <body ng-controller="TilesController">
 	<div drop-area on-drop="moveTile">
 		<div ng-repeat="i in steamapps" drag-item on-init="initTile" id="steamapp{{i.id}}" class="item">
-			{{i.name}}
+			<a href="http://store.steampowered.com/app/{{i.id}}" class="steamlink">{{i.name}}</a>
+			<br />
+			<br />
+			<br />
+			<br />
+			<a href="steam://run/{{i.id}}" class="steamlink">Run</a>
 		</div>
 	</div>
 </body>
