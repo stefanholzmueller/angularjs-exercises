@@ -1,11 +1,15 @@
 var module = angular.module('dragndrop', []);
 
 module.directive('dragItem', function() {
-	return function(scope, element) {
+	return function(scope, element, attrs) {
 		// this gives us the native JS object
 		var el = element[0];
 
 		el.draggable = true;
+
+		 var userFnName = attrs['onInit'];
+		 var userFn = scope[userFnName];
+		 userFn(el);
 
 		el.addEventListener('dragstart', function(e) {
 			var style = window.getComputedStyle(e.target, null);

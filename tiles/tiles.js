@@ -10,9 +10,17 @@ app.value('steamapps', [ {
 } ]);
 // config end
 
-app.controller('TilesController', [ '$scope', 'steamapps', function($scope, steamapps) {
+app.controller('TilesController', [ '$scope', '$window', 'steamapps', function($scope, $window, steamapps) {
 	$scope._ = _; // lodash
 	$scope.steamapps = steamapps;
+
+	$scope.initTile = function(el) {
+		var style = $window.getComputedStyle(el, null);
+//		var left = style.getPropertyValue("width") - el.getPro
+		
+		el.style.top = "333px";
+		el.style.left = "111px";
+	};
 
 	$scope.moveTile = function(area, item, x, y) {
 		item.style.left = x + "px";

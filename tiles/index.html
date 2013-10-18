@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Kata #5</title>
-<script src="http://code.angularjs.org/1.0.8/angular.min.js" type="text/javascript"></script>
+<script src="angular.js" type="text/javascript"></script>
 <script src="lodash.js" type="text/javascript"></script>
 <script src="dragndrop.js" type="text/javascript"></script>
 <script src="tiles.js" type="text/javascript"></script>
@@ -11,7 +11,9 @@
 </head>
 <body ng-controller="TilesController">
 	<div drop-area on-drop="moveTile">
-		<div ng-repeat="i in steamapps" drag-item id="steamapp{{i.id}}" class="item">{{i.name}}</div>
+		<div ng-repeat="i in steamapps" drag-item on-init="initTile" id="steamapp{{i.id}}" class="item">
+			{{i.name}}
+		</div>
 	</div>
 </body>
 </html>
