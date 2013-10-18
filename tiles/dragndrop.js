@@ -7,9 +7,9 @@ module.directive('dragItem', function() {
 
 		el.draggable = true;
 
-		 var userFnName = attrs['onInit'];
-		 var userFn = scope[userFnName];
-		 userFn(el);
+		var userFnName = attrs['onInit'];
+		var userFn = scope[userFnName];
+		userFn(el, element.parent()[0]);
 
 		el.addEventListener('dragstart', function(e) {
 			var style = window.getComputedStyle(e.target, null);

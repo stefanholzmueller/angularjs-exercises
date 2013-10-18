@@ -14,12 +14,14 @@ app.controller('TilesController', [ '$scope', '$window', 'steamapps', function($
 	$scope._ = _; // lodash
 	$scope.steamapps = steamapps;
 
-	$scope.initTile = function(el) {
-		var style = $window.getComputedStyle(el, null);
-//		var left = style.getPropertyValue("width") - el.getPro
+	$scope.initTile = function(el, parent) {
+		var elStyle = $window.getComputedStyle(el, null);
+		var parentStyle = $window.getComputedStyle(parent, null);
+		var maxTop = parseInt(parentStyle.getPropertyValue("height"), 10) - parseInt(elStyle.getPropertyValue("height"), 10);
+		var maxLeft = parseInt(parentStyle.getPropertyValue("width"), 10) - parseInt(elStyle.getPropertyValue("width"), 10);
 		
-		el.style.top = "333px";
-		el.style.left = "111px";
+		el.style.top = Math.random() * maxTop + "px";
+		el.style.left = Math.random() * maxLeft + "px";
 	};
 
 	$scope.moveTile = function(area, item, x, y) {
