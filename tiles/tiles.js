@@ -1,5 +1,9 @@
 var app = angular.module('tiles', [ 'dragndrop' ]);
 
+app.config([ '$compileProvider', function($compileProvider) {
+	$compileProvider.urlSanitizationWhitelist(/^\s*(https?|ftp|mailto|steam):/);
+} ]);
+
 // config start
 app.value('steamapps', [ {
 	id : 232450,
@@ -22,7 +26,7 @@ app.controller('TilesController', [ '$scope', '$window', 'steamapps', function($
 		var parentStyle = $window.getComputedStyle(parent, null);
 		var maxTop = parseInt(parentStyle.getPropertyValue("height"), 10) - parseInt(elStyle.getPropertyValue("height"), 10);
 		var maxLeft = parseInt(parentStyle.getPropertyValue("width"), 10) - parseInt(elStyle.getPropertyValue("width"), 10);
-		
+
 		el.style.top = Math.random() * maxTop + "px";
 		el.style.left = Math.random() * maxLeft + "px";
 	};
