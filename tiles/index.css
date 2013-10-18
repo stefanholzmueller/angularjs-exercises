@@ -1,0 +1,31 @@
+html,body {
+	height: 100%;
+	margin: 0;
+}
+
+[drop-area] {
+	min-height: 100%;
+}
+
+.item {
+	min-height: 200px;
+	min-width: 200px;
+	max-height: 200px;
+	max-width: 200px;
+	background: grey;
+	position: absolute;
+	text-align: center;
+}
+
+.steamlink {
+	display: inline-block;
+	text-align: center;
+}
+
+.drag {
+	opacity: 0.5;
+}
+
+.over {
+	
+}

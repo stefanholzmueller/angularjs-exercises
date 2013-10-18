@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html ng-app="tiles">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Kata #5</title>
+<script src="angular.js" type="text/javascript"></script>
+<script src="lodash.js" type="text/javascript"></script>
+<script src="dragndrop.js" type="text/javascript"></script>
+<script src="tiles.js" type="text/javascript"></script>
+<link href="index.css" rel="stylesheet">
+</head>
+<body ng-controller="TilesController">
+	<div drop-area on-drop="moveTile">
+		<div ng-repeat="i in steamapps" drag-item on-init="initTile" id="steamapp{{i.id}}" class="item">
+			<span class="steamlink">{{i.name}}</span>
+			<br />
+			<br />
+			<a href="http://store.steampowered.com/app/{{i.id}}">Web</a>
+			<br />
+			<a href="steam://store/{{i.id}}" class="steamlink">Store</a>
+			<br />
+			<a href="steam://run/{{i.id}}" class="steamlink">Run</a>
+		</div>
+	</div>
+</body>
+</html>
