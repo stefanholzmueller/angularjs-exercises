@@ -7,7 +7,7 @@ interface Expr {
 	evaluate(): number;
 }
 
-class Val {
+class Val implements Expr {
 	constructor(private value : number) {
 	}
 
@@ -21,7 +21,7 @@ class Val {
 	}
 }
 
-class BinaryOp {
+class BinaryOp implements Expr {
 	constructor(private left : Expr, private right : Expr, private symbol : string, private precedence : number, private evaluator : (l : number, r : number) => number) {
 	}
 
