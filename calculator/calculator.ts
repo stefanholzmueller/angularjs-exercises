@@ -21,9 +21,38 @@ class Val {
 	}
 }
 
+class BinaryOp {
+	constructor(private left : Expr, private right: Expr, private symbol : string, private evaluator : (x: number, y: number) => number) {
+	}
+
+	display() {
+		return this.left.display() + this.symbol + this.right.display();
+	}
+
+	evaluate() {
+		return this.evaluator(this.left.evaluate(), this.right.evaluate());
+	}
+}
+
+class AddOp extends BinaryOp {
+	constructor(left, right) {
+		super(left, right, "+", function (a, b) {
+			return a + b;
+		});
+	}
+}
+class SubOp extends BinaryOp {
+	constructor(left, right) {
+		super(left, right, "-", function (a, b) {
+			return a - b;
+		});
+	}
+}
+
 
 var app = angular.module("calculator", []);
 
 app.controller("CalculatorController", function ($scope) {
-	$scope.keypad = _.range(10);
-});
+		$scope.keypad = _.range(10);
+	}
+);
