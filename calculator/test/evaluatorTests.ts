@@ -1,7 +1,7 @@
 /// <reference path="tsUnit.ts" />
-/// <reference path="../calculator.ts" />
+/// <reference path="../evaluator.ts" />
 
-class Tests extends tsUnit.TestClass {
+class EvaluatorTests extends tsUnit.TestClass {
 
 	evaluateVal() {
 		var five = new Val(5);
@@ -68,7 +68,7 @@ class Tests extends tsUnit.TestClass {
 var test = new tsUnit.Test();
 
 // add your test class (you can call this multiple times)
-test.addTestClass(new Tests());
+test.addTestClass(new EvaluatorTests());
 
 // Use the built in results display
 test.showResults(document.body, test.run());
