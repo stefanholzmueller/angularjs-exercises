@@ -8,7 +8,7 @@ interface Expr {
 }
 
 class Val {
-	constructor(public value : number) {
+	constructor(private value : number) {
 	}
 
 	display() {
@@ -21,7 +21,7 @@ class Val {
 }
 
 class BinaryOp {
-	constructor(private left : Expr, private right: Expr, private symbol : string, private evaluator : (x: number, y: number) => number) {
+	constructor(private left : Expr, private right : Expr, private symbol : string, private evaluator : (l : number, r : number) => number) {
 	}
 
 	display() {
@@ -35,15 +35,15 @@ class BinaryOp {
 
 class AddOp extends BinaryOp {
 	constructor(left, right) {
-		super(left, right, "+", function (a, b) {
-			return a + b;
+		super(left, right, "+", function (l, r) {
+			return l + r;
 		});
 	}
 }
 class SubOp extends BinaryOp {
 	constructor(left, right) {
-		super(left, right, "-", function (a, b) {
-			return a - b;
+		super(left, right, "-", function (l, r) {
+			return l - r;
 		});
 	}
 }

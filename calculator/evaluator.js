@@ -40,8 +40,8 @@ var BinaryOp = (function () {
 var AddOp = (function (_super) {
     __extends(AddOp, _super);
     function AddOp(left, right) {
-        _super.call(this, left, right, "+", function (a, b) {
-            return a + b;
+        _super.call(this, left, right, "+", function (l, r) {
+            return l + r;
         });
     }
     return AddOp;
@@ -49,8 +49,8 @@ var AddOp = (function (_super) {
 var SubOp = (function (_super) {
     __extends(SubOp, _super);
     function SubOp(left, right) {
-        _super.call(this, left, right, "-", function (a, b) {
-            return a - b;
+        _super.call(this, left, right, "-", function (l, r) {
+            return l - r;
         });
     }
     return SubOp;
