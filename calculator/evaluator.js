@@ -28,7 +28,7 @@ var BinaryOp = (function () {
         this.evaluator = evaluator;
     }
     BinaryOp.prototype.display = function () {
-        return this.left.display() + this.symbol + this.right.display();
+        return "(" + this.left.display() + this.symbol + this.right.display() + ")";
     };
 
     BinaryOp.prototype.evaluate = function () {

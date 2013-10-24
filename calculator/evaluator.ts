@@ -25,7 +25,7 @@ class BinaryOp {
 	}
 
 	display() {
-		return this.left.display() + this.symbol + this.right.display();
+		return "(" + this.left.display() + this.symbol + this.right.display() + ")";
 	}
 
 	evaluate() {
