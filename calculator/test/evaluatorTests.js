@@ -82,6 +82,18 @@ var EvaluatorTests = (function (_super) {
 
         this.areIdentical("4+2*3", combined.display());
     };
+
+    EvaluatorTests.prototype.evaluateAllBasicOperators = function () {
+        var allBasic = new MulOp(new DivOp(new Val(1), new Val(4)), new AddOp(new Val(5), new Val(2)));
+
+        this.areIdentical(1.75, allBasic.evaluate());
+    };
+
+    EvaluatorTests.prototype.displayAllBasicOperators = function () {
+        var allBasic = new MulOp(new DivOp(new Val(1), new Val(4)), new AddOp(new Val(5), new Val(2)));
+
+        this.areIdentical("(1/4)*(5+2)", allBasic.display());
+    };
     return EvaluatorTests;
 })(tsUnit.TestClass);
 

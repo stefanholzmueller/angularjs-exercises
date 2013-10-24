@@ -58,3 +58,11 @@ class MulOp extends BinaryOp {
 		});
 	}
 }
+
+class DivOp extends BinaryOp { // TODO handle div by zero
+	constructor(left, right) {
+		super(left, right, "/", 3, function (l, r) {
+			return l / r;
+		});
+	}
+}

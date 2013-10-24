@@ -70,4 +70,14 @@ var MulOp = (function (_super) {
     }
     return MulOp;
 })(BinaryOp);
+
+var DivOp = (function (_super) {
+    __extends(DivOp, _super);
+    function DivOp(left, right) {
+        _super.call(this, left, right, "/", 3, function (l, r) {
+            return l / r;
+        });
+    }
+    return DivOp;
+})(BinaryOp);
 //# sourceMappingURL=evaluator.js.map
