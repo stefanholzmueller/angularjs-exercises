@@ -44,7 +44,7 @@ var EvaluatorTests = (function (_super) {
     EvaluatorTests.prototype.displayAddOp = function () {
         var addOp = new AddOp(new Val(1), new Val(2));
 
-        this.areIdentical("(1+2)", addOp.display());
+        this.areIdentical("1+2", addOp.display());
     };
 
     EvaluatorTests.prototype.evaluateSubOp = function () {
@@ -56,7 +56,7 @@ var EvaluatorTests = (function (_super) {
     EvaluatorTests.prototype.displaySubOp = function () {
         var subOp = new SubOp(new Val(12), new Val(2));
 
-        this.areIdentical("(12-2)", subOp.display());
+        this.areIdentical("12-2", subOp.display());
     };
 
     EvaluatorTests.prototype.evaluateAddOpAndSubOp = function () {
@@ -68,7 +68,19 @@ var EvaluatorTests = (function (_super) {
     EvaluatorTests.prototype.displayAddOpAndSubOp = function () {
         var combined = new SubOp(new Val(8), new AddOp(new Val(2), new Val(1)));
 
-        this.areIdentical("(8-(2+1))", combined.display());
+        this.areIdentical("8-(2+1)", combined.display());
+    };
+
+    EvaluatorTests.prototype.evaluateAddOpAndMulOp = function () {
+        var combined = new MulOp(new Val(4), new AddOp(new Val(2), new Val(1)));
+
+        this.areIdentical(12, combined.evaluate());
+    };
+
+    EvaluatorTests.prototype.displayAddOpAndMulOp = function () {
+        var combined = new AddOp(new Val(4), new MulOp(new Val(2), new Val(3)));
+
+        this.areIdentical("4+2*3", combined.display());
     };
     return EvaluatorTests;
 })(tsUnit.TestClass);

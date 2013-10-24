@@ -3,7 +3,7 @@
 "use strict";
 
 interface Expr {
-	display(): string;
+	display(p): string;
 	evaluate(): number;
 }
 
@@ -12,7 +12,8 @@ class Val {
 	}
 
 	display() {
-		return this.value >= 0 ? this.value.toString() : "(" + this.value.toString() + ")";
+		var str = this.value.toString();
+		return this.value >= 0 ? str : "(" + str + ")";
 	}
 
 	evaluate() {
@@ -21,11 +22,12 @@ class Val {
 }
 
 class BinaryOp {
-	constructor(private left : Expr, private right : Expr, private symbol : string, private evaluator : (l : number, r : number) => number) {
+	constructor(private left : Expr, private right : Expr, private symbol : string, private precedence : number, private evaluator : (l : number, r : number) => number) {
 	}
 
-	display() {
-		return "(" + this.left.display() + this.symbol + this.right.display() + ")";
+	display(p : number = 0) {
+		var inner = this.left.display(this.precedence) + this.symbol + this.right.display(this.precedence);
+		return this.precedence > p ? inner : "(" + inner + ")";
 	}
 
 	evaluate() {
@@ -35,15 +37,24 @@ class BinaryOp {
 
 class AddOp extends BinaryOp {
 	constructor(left, right) {
-		super(left, right, "+", function (l, r) {
+		super(left, right, "+", 2, function (l, r) {
 			return l + r;
 		});
 	}
 }
+
 class SubOp extends BinaryOp {
 	constructor(left, right) {
-		super(left, right, "-", function (l, r) {
+		super(left, right, "-", 2, function (l, r) {
 			return l - r;
+		});
+	}
+}
+
+class MulOp extends BinaryOp {
+	constructor(left, right) {
+		super(left, right, "*", 3, function (l, r) {
+			return l * r;
 		});
 	}
 }

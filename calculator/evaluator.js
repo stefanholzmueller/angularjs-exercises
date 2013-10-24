@@ -11,7 +11,8 @@ var Val = (function () {
         this.value = value;
     }
     Val.prototype.display = function () {
-        return this.value >= 0 ? this.value.toString() : "(" + this.value.toString() + ")";
+        var str = this.value.toString();
+        return this.value >= 0 ? str : "(" + str + ")";
     };
 
     Val.prototype.evaluate = function () {
@@ -21,14 +22,17 @@ var Val = (function () {
 })();
 
 var BinaryOp = (function () {
-    function BinaryOp(left, right, symbol, evaluator) {
+    function BinaryOp(left, right, symbol, precedence, evaluator) {
         this.left = left;
         this.right = right;
         this.symbol = symbol;
+        this.precedence = precedence;
         this.evaluator = evaluator;
     }
-    BinaryOp.prototype.display = function () {
-        return "(" + this.left.display() + this.symbol + this.right.display() + ")";
+    BinaryOp.prototype.display = function (p) {
+        if (typeof p === "undefined") { p = 0; }
+        var inner = this.left.display(this.precedence) + this.symbol + this.right.display(this.precedence);
+        return this.precedence > p ? inner : "(" + inner + ")";
     };
 
     BinaryOp.prototype.evaluate = function () {
@@ -40,19 +44,30 @@ var BinaryOp = (function () {
 var AddOp = (function (_super) {
     __extends(AddOp, _super);
     function AddOp(left, right) {
-        _super.call(this, left, right, "+", function (l, r) {
+        _super.call(this, left, right, "+", 2, function (l, r) {
             return l + r;
         });
     }
     return AddOp;
 })(BinaryOp);
+
 var SubOp = (function (_super) {
     __extends(SubOp, _super);
     function SubOp(left, right) {
-        _super.call(this, left, right, "-", function (l, r) {
+        _super.call(this, left, right, "-", 2, function (l, r) {
             return l - r;
         });
     }
     return SubOp;
+})(BinaryOp);
+
+var MulOp = (function (_super) {
+    __extends(MulOp, _super);
+    function MulOp(left, right) {
+        _super.call(this, left, right, "*", 3, function (l, r) {
+            return l * r;
+        });
+    }
+    return MulOp;
 })(BinaryOp);
 //# sourceMappingURL=evaluator.js.map

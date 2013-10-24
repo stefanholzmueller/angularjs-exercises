@@ -36,7 +36,7 @@ class EvaluatorTests extends tsUnit.TestClass {
 	displayAddOp() {
 		var addOp = new AddOp(new Val(1), new Val(2));
 
-		this.areIdentical("(1+2)", addOp.display());
+		this.areIdentical("1+2", addOp.display());
 	}
 
 	evaluateSubOp() {
@@ -48,7 +48,7 @@ class EvaluatorTests extends tsUnit.TestClass {
 	displaySubOp() {
 		var subOp = new SubOp(new Val(12), new Val(2));
 
-		this.areIdentical("(12-2)", subOp.display());
+		this.areIdentical("12-2", subOp.display());
 	}
 
 	evaluateAddOpAndSubOp() {
@@ -60,7 +60,19 @@ class EvaluatorTests extends tsUnit.TestClass {
 	displayAddOpAndSubOp() {
 		var combined = new SubOp(new Val(8), new AddOp(new Val(2), new Val(1)));
 
-		this.areIdentical("(8-(2+1))", combined.display());
+		this.areIdentical("8-(2+1)", combined.display());
+	}
+
+	evaluateAddOpAndMulOp() {
+		var combined = new MulOp(new Val(4), new AddOp(new Val(2), new Val(1)));
+
+		this.areIdentical(12, combined.evaluate());
+	}
+
+	displayAddOpAndMulOp() {
+		var combined = new AddOp(new Val(4), new MulOp(new Val(2), new Val(3)));
+
+		this.areIdentical("4+2*3", combined.display());
 	}
 }
 
