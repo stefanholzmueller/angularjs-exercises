@@ -138,3 +138,9 @@ app.directive('keypressEvents', [
 		};
 	}
 ]);
+
+app.filter('displayFormula', function () {
+	return function (input : Array<Input>) {
+		return _.map(input,(x) => x.display()).join("");
+	}
+});

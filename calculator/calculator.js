@@ -154,4 +154,12 @@ app.directive('keypressEvents', [
         };
     }
 ]);
+
+app.filter('displayFormula', function () {
+    return function (input) {
+        return _.map(input, function (x) {
+            return x.display();
+        }).join("");
+    };
+});
 //# sourceMappingURL=calculator.js.map
