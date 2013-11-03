@@ -16,15 +16,29 @@ class Num extends Input {
 	}
 }
 
+function evaluate(formula) {
+	return 123;
+}
+
 var app = angular.module("calculator", []);
 
 app.controller("CalculatorController", function ($scope) {
 	$scope.formula = [];
-	$scope.result = "";
+	$scope.result = "0";
 	$scope.grid = [
 		[ new Num(7), new Num(8), new Num(9), new Op(":") ],
 		[ new Num(4), new Num(5), new Num(6), new Op("*") ],
 		[ new Num(1), new Num(2), new Num(3), new Op("-") ],
 		[ new Num(0), new Input("."), new Input("="), new Op("+") ]
 	];
+
+	$scope.press = function (key) {
+		if (key.label === "=") {
+			$scope.result = evaluate($scope.formula)
+		} else if (key.label === ".") {
+			// TODO decimal point
+		} else {
+			$scope.formula.push(key);
+		}
+	}
 });
