@@ -9,8 +9,10 @@
     <link rel="stylesheet" type="text/css" href="index.css"/>
 </head>
 <body ng-controller="CalculatorController">
+<p class="formula">{{formula | json}}</p>
+<p class="result">{{result}}</p>
 <div ng-repeat="row in grid">
-    <button ng-repeat="key in row" type="button" class="key">{{key}}</button>
+    <button ng-repeat="key in row" type="button" class="key">{{key.label}}</button>
 </div>
 </body>
 </html>
