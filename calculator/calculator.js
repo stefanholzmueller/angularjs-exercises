@@ -78,14 +78,10 @@ var DivOp = (function (_super) {
     return DivOp;
 })(BinaryOp);
 
-function evaluate(formula) {
-    return 123;
-}
-
 var app = angular.module("calculator", []);
 
 app.controller("CalculatorController", function ($scope) {
-    $scope.formula = [];
+    $scope.formula = new Array();
     $scope.result = "0";
     $scope.grid = [
         [new Num(7), new Num(8), new Num(9), new DivOp()],
@@ -111,16 +107,25 @@ app.controller("CalculatorController", function ($scope) {
         } else {
             if (isNum(last)) {
                 $scope.formula.push(k);
-            } else {
+            } else if (last !== undefined) {
                 $scope.formula.pop();
                 $scope.formula.push(k);
             }
         }
     }
 
+    function evaluateWithPrecedence(formula, precedence) {
+        return formula;
+    }
+
+    function evaluate() {
+        var formula = _.clone($scope.formula);
+        return evaluateWithPrecedence(evaluateWithPrecedence(formula, 3), 2);
+    }
+
     $scope.press = function (key) {
         if (key.display() === "=") {
-            $scope.result = evaluate($scope.formula);
+            $scope.result = evaluate();
         } else if (key.display() === ".") {
             // TODO decimal point
         } else {

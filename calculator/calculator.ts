@@ -64,14 +64,11 @@ class DivOp extends BinaryOp { // TODO handle div by zero
 	}
 }
 
-function evaluate(formula) {
-	return 123;
-}
 
 var app = angular.module("calculator", []);
 
 app.controller("CalculatorController", function ($scope) {
-	$scope.formula = [];
+	$scope.formula = new Array<Input>();
 	$scope.result = "0";
 	$scope.grid = [
 		[ new Num(7), new Num(8), new Num(9), new DivOp() ],
@@ -97,16 +94,25 @@ app.controller("CalculatorController", function ($scope) {
 		} else { // BinaryOp
 			if (isNum(last)) {
 				$scope.formula.push(k); // add op
-			} else {
+			} else if (last !== undefined) {
 				$scope.formula.pop(); // replace op
 				$scope.formula.push(k);
 			}
 		}
 	}
 
+	function evaluateWithPrecedence(formula : Array<Input>, precedence : number) : Array<Input> {
+		return formula;
+	}
+
+	function evaluate() {
+		var formula : Array<Input> = _.clone($scope.formula);
+		return evaluateWithPrecedence(evaluateWithPrecedence(formula, 3), 2);
+	}
+
 	$scope.press = function (key) {
-		if (key.display() === "=") {
-			$scope.result = evaluate($scope.formula)
+		if (key.display() === "=") { // TODO sanity check
+			$scope.result = evaluate()
 		} else if (key.display() === ".") {
 			// TODO decimal point
 		} else {

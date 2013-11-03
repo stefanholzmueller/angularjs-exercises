@@ -10,7 +10,7 @@
 </head>
 <body ng-controller="CalculatorController" keypress-events>
 <p class="formula">{{formula | displayFormula}}</p>
-<p class="result">{{result}}</p>
+<p class="result">{{result | displayFormula}}</p>
 <div ng-repeat="row in grid">
     <button ng-repeat="key in row" ng-click="press(key)" ng-keypress="pressKeypad($event)" type="button" class="key">{{key.display()}}</button>
 </div>
