@@ -26,7 +26,7 @@ app.controller("CalculatorController", function ($scope) {
 	$scope.formula = [];
 	$scope.result = "0";
 	$scope.grid = [
-		[ new Num(7), new Num(8), new Num(9), new Op(":") ],
+		[ new Num(7), new Num(8), new Num(9), new Op("/") ],
 		[ new Num(4), new Num(5), new Num(6), new Op("*") ],
 		[ new Num(1), new Num(2), new Num(3), new Op("-") ],
 		[ new Num(0), new Input("."), new Input("="), new Op("+") ]
@@ -40,5 +40,29 @@ app.controller("CalculatorController", function ($scope) {
 		} else {
 			$scope.formula.push(key);
 		}
-	}
+	};
+	$scope.$on("keypress", function (keyCode) {
+		var pressedKey = String.fromCharCode(keyCode); // TODO arg is undefined
+		_.each($scope.grid, (row) => _.each(row, (key) => {
+			if (key.label === pressedKey) {
+				$scope.press(key);
+			}
+		}));
+	});
 });
+
+app.directive('keypressEvents', [
+	'$document',
+	'$rootScope',
+	function ($document, $rootScope) {
+		return {
+			restrict: 'A',
+			link: function () {
+				$document.bind('keypress', function (e) {
+					console.log('Got keypress:', e.which);
+					$rootScope.$broadcast('keypress', e.which);
+				});
+			}
+		};
+	}
+]);
