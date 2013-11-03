@@ -12,7 +12,7 @@
 <p class="formula">{{formula | json}}</p>
 <p class="result">{{result}}</p>
 <div ng-repeat="row in grid">
-    <button ng-repeat="key in row" ng-click="press(key)" ng-keypress="pressKeypad($event)" type="button" class="key">{{key.label}}</button>
+    <button ng-repeat="key in row" ng-click="press(key)" ng-keypress="pressKeypad($event)" type="button" class="key">{{key.display()}}</button>
 </div>
 </body>
 </html>
