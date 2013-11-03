@@ -3,6 +3,9 @@
 var app = angular.module("calculator", []);
 
 app.controller("CalculatorController", function ($scope) {
-    $scope.keypad = _.range(10);
+    $scope.grid = [
+        ["+", "7"],
+        ["-", "4"]
+    ];
 });
 //# sourceMappingURL=calculator.js.map
