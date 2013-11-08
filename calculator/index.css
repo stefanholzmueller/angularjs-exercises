@@ -1,0 +1,12 @@
+.key {
+    width: 40px;
+    height: 40px;
+}
+
+.formula {
+    font-size: 150%;
+}
+
+.result {
+    font-size: 250%;
+}
