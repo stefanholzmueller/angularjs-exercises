@@ -156,26 +156,29 @@ app.controller("CalculatorController", function ($scope) {
 			addToFormula(key);
 		}
 	};
-	$scope.$on("keypress", function (keyCode) {
-		var pressedKey = String.fromCharCode(keyCode); // TODO arg is undefined
-		_.each($scope.grid, (row) => _.each(row, (key) => {
-			if (key.display() === pressedKey) {
-				$scope.press(key);
-			}
-		}));
+	$scope.$on("keypress", function (e, keyCode) {
+		if (keyCode === 13) {
+			$scope.press(new Special("="));
+		} else {
+			var pressedKey = String.fromCharCode(keyCode);
+			_.each($scope.grid, (row) => _.each(row, (key) => {
+				if (key.display() === pressedKey) {
+					$scope.press(key);
+				}
+			}));
+		}
 	});
 });
 
 app.directive('keypressEvents', [
-	'$document',
-	'$rootScope',
-	function ($document, $rootScope) {
+	function () {
 		return {
 			restrict: 'A',
-			link: function () {
-				$document.bind('keypress', function (e) {
-					console.log('Got keypress:', e.which);
-					$rootScope.$broadcast('keypress', e.which);
+			link: function ($scope, $element) {
+				$element.bind('keypress', function (e) {
+					$scope.$apply(function () {
+						$scope.$emit('keypress', e.which);
+					})
 				});
 			}
 		};
@@ -184,6 +187,6 @@ app.directive('keypressEvents', [
 
 app.filter('displayFormula', function () {
 	return function (input : Array<Input>) {
-			return _.map(input,(x) => x.display()).join("");
+		return _.map(input,(x) => x.display()).join("");
 	}
 });
