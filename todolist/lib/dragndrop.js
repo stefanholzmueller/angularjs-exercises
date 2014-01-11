@@ -2,7 +2,6 @@ var module = angular.module('dragndrop', []);
 
 module.directive('dragItem', function() {
 	return function(scope, element, attrs) {
-		// this gives us the native JS object
 		var el = element[0];
 
 		el.draggable = true;
@@ -38,7 +37,6 @@ module.directive('dragItem', function() {
 module.directive('dropArea', function() {
 	return {
 		link : function(scope, element, attrs) {
-			// again we need the native object
 			var el = element[0];
 
 			el.addEventListener('dragover', function(e) {

@@ -17,6 +17,10 @@ html, body {
     overflow: auto;
 }
 
+.urgent {
+    background: red;
+}
+
 .drag {
     opacity: 0.2;
 }
