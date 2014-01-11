@@ -1,0 +1,26 @@
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.board {
+    min-height: 100%;
+}
+
+.item {
+    position: absolute;
+}
+
+.todo {
+    background: #fff17c;
+    resize: both;
+    overflow: auto;
+}
+
+.drag {
+    opacity: 0.2;
+}
+
+.over {
+    opacity: 0.5;
+}
