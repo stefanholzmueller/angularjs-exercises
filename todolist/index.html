@@ -11,7 +11,7 @@
 </head>
 <body ng-controller="todolistController" keypress-events>
 <div class="board" ng-click="createTodo($event)" on-drop="moveTodo" drop-area>
-    <div ng-repeat="t in todos" ng-click="$event.stopPropagation()" id="{{t.id}}" class="item todo" ng-class="{urgent: t.today}" style="{{t.pos}}" drag-item>
+    <div ng-repeat="t in todos track by $index" ng-click="$event.stopPropagation()" id="{{t.id}}" class="item todo" ng-class="{urgent: t.today}" style="{{t.pos}}" drag-item>
         <textarea>{{t.description}}</textarea>
         <hr>
         <label><input type="checkbox" ng-model="t.today">due today</label>
