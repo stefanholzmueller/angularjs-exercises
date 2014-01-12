@@ -59,6 +59,7 @@ html, body {
 }
 
 .board {
+    background-image:url('cork.jpg');
     min-height: 100%;
 }
 
