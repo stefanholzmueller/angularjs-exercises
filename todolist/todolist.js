@@ -25,7 +25,7 @@ app.controller("todolistController", [
             var maxId = _.max(_.map($scope.todos, function (t) {
                 return t.id;
             })) || 0;
-            return maxId + 1;
+            return _.isFinite(maxId) ? maxId + 1 : 1;
         };
 
         $scope.createTodo = function ($event) {
