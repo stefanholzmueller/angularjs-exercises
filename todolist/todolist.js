@@ -17,26 +17,31 @@ app.controller("todolistController", [
     function ($scope, localStorageService) {
         $scope.todos = localStorageService.loadTodos();
 
+        var save = function () {
+            localStorageService.saveTodos($scope.todos);
+        };
+
         var nextId = function () {
             return 1 + _.max(_.map($scope.todos, function (t) {
                 return t.id;
             }));
         };
 
-        var save = function () {
-            localStorageService.saveTodos($scope.todos);
-        };
-
         $scope.createTodo = function ($event) {
-            var pos = Todo.coords2pos($event.offsetX, $event.offsetY);
-            $scope.todos.push({ id: nextId(), description: "", today: false, pos: pos });
+            var x = $event.offsetX == undefined ? $event.layerX : $event.offsetX;
+            var y = $event.offsetY == undefined ? $event.layerY : $event.offsetY;
+            $scope.todos.push({ id: nextId(), description: "", today: false, pos: Todo.coords2pos(x, y) });
             save();
         };
 
         $scope.moveTodo = function (area, el, x, y) {
             el.style.left = x + "px";
             el.style.top = y + "px";
-            // TODO save
+            var todo = _.find($scope.todos, function (t) {
+                return t.id == el.id;
+            });
+            todo.pos = Todo.coords2pos(x, y);
+            save();
         };
 
         $scope.deleteTodo = function (id) {
