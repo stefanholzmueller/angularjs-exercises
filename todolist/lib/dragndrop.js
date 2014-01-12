@@ -41,9 +41,9 @@ module.directive('dropArea', function() {
 
 			el.addEventListener('dragover', function(e) {
 				e.dataTransfer.dropEffect = 'move';
-				// allows us to drop
-				if (e.preventDefault)
+				if (e.preventDefault) {
 					e.preventDefault();
+                }
 				this.classList.add('over');
 				return false;
 			}, false);
