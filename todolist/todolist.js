@@ -4,7 +4,7 @@ var Todo = (function () {
     function Todo() {
         this.today = false;
     }
-    Todo.pos2str = function (x, y) {
+    Todo.coords2pos = function (x, y) {
         return "left: " + x + "px; top: " + y + "px;";
     };
     return Todo;
@@ -14,40 +14,32 @@ var app = angular.module('todolist', ['dragndrop']);
 
 app.controller("todolistController", [
     '$scope',
-    '$window',
-    function ($scope, $window) {
+    function ($scope) {
         var todos = [
             { id: 1, description: "aDescription", today: true, pos: "left: 444px; top: 666px;" }
         ];
         $scope.todos = todos;
 
         var nextId = function () {
-            return 1 + _.max(_.result($scope.todos, "id"));
+            return 1 + _.max(_.map($scope.todos, function (t) {
+                return t.id;
+            }));
         };
 
         $scope.createTodo = function ($event) {
-            var pos = Todo.pos2str($event.offsetX, $event.offsetY);
-            $scope.todos.push({ id: nextId(), description: "asdasdasd", today: false, pos: pos });
+            var pos = Todo.coords2pos($event.offsetX, $event.offsetY);
+            $scope.todos.push({ id: nextId(), description: "", today: false, pos: pos });
         };
 
         $scope.moveTodo = function (area, item, x, y) {
             item.style.left = x + "px";
             item.style.top = y + "px";
         };
-    }
-]);
 
-app.directive('keypressEvents', [
-    function () {
-        return {
-            restrict: 'A',
-            link: function ($scope, $element) {
-                $element.bind('keypress', function (e) {
-                    $scope.$apply(function () {
-                        $scope.$emit('keypress', e.which);
-                    });
-                });
-            }
+        $scope.deleteTodo = function (id) {
+            _.remove($scope.todos, function (t) {
+                return t.id === id;
+            });
         };
     }
 ]);

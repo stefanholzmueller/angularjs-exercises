@@ -15,6 +15,7 @@
         <textarea>{{t.description}}</textarea>
         <hr>
         <label><input type="checkbox" ng-model="t.today">due today</label>
+        <input class="done" type="button" ng-click="deleteTodo(t.id); $event.stopPropagation()" value="done">
     </div>
 </div>
 </body>

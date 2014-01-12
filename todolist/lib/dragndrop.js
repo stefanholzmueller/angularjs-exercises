@@ -44,17 +44,6 @@ module.directive('dropArea', function() {
 				if (e.preventDefault) {
 					e.preventDefault();
                 }
-				this.classList.add('over');
-				return false;
-			}, false);
-
-			el.addEventListener('dragenter', function(e) {
-				this.classList.add('over');
-				return false;
-			}, false);
-
-			el.addEventListener('dragleave', function(e) {
-				this.classList.remove('over');
 				return false;
 			}, false);
 
@@ -66,8 +55,6 @@ module.directive('dropArea', function() {
 				if (e.stopPropagation) {
 					e.stopPropagation();
 				}
-
-				this.classList.remove('over');
 
 				var payload = JSON.parse(e.dataTransfer.getData('text'));
 
