@@ -17,9 +17,9 @@ var app = angular.module('todolist', [ 'dragndrop' ]);
 app.controller("todolistController", [ '$scope', 'localStorageService', function ($scope, localStorageService) {
 	$scope.todos = localStorageService.loadTodos();
 
-	$scope.save = function () {
-		localStorageService.saveTodos($scope.todos);
-	};
+	$scope.$watch('todos', function(newValue) {
+		localStorageService.saveTodos(newValue);
+	}, true);
 
 	var nextId = function () {
 		var maxId = _.max(_.map($scope.todos, t => t.id)) || 0;
@@ -30,18 +30,15 @@ app.controller("todolistController", [ '$scope', 'localStorageService', function
 		var x = $event.offsetX == undefined ? $event.layerX : $event.offsetX;
 		var y = $event.offsetY == undefined ? $event.layerY : $event.offsetY;
 		$scope.todos.push({id: nextId(), description: "", today: false, pos: Todo.coords2pos(x, y)});
-		$scope.save();
 	};
 
 	$scope.moveTodo = function (area, el, x, y) {
 		var todo : Todo = _.find($scope.todos, t => t.id == el.id); // type coercion!
 		todo.pos = Todo.coords2pos(x, y);
-		$scope.save();
 	};
 
 	$scope.deleteTodo = function (id) {
 		_.remove($scope.todos, t => t.id === id);
-		$scope.save();
 	};
 }]);
 
