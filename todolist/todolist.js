@@ -17,9 +17,9 @@ app.controller("todolistController", [
     function ($scope, localStorageService) {
         $scope.todos = localStorageService.loadTodos();
 
-        $scope.save = function () {
-            localStorageService.saveTodos($scope.todos);
-        };
+        $scope.$watch('todos', function (newValue) {
+            localStorageService.saveTodos(newValue);
+        }, true);
 
         var nextId = function () {
             var maxId = _.max(_.map($scope.todos, function (t) {
@@ -32,7 +32,6 @@ app.controller("todolistController", [
             var x = $event.offsetX == undefined ? $event.layerX : $event.offsetX;
             var y = $event.offsetY == undefined ? $event.layerY : $event.offsetY;
             $scope.todos.push({ id: nextId(), description: "", today: false, pos: Todo.coords2pos(x, y) });
-            $scope.save();
         };
 
         $scope.moveTodo = function (area, el, x, y) {
@@ -40,14 +39,12 @@ app.controller("todolistController", [
                 return t.id == el.id;
             });
             todo.pos = Todo.coords2pos(x, y);
-            $scope.save();
         };
 
         $scope.deleteTodo = function (id) {
             _.remove($scope.todos, function (t) {
                 return t.id === id;
             });
-            $scope.save();
         };
     }
 ]);

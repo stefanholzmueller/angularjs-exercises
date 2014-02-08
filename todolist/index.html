@@ -2,7 +2,7 @@
 <html ng-app="todolist">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Kata #7</title>
+    <title>ToDo list</title>
     <script src="lib/angular/angular.js" type="text/javascript"></script>
     <script src="lib/lodash/lodash.js" type="text/javascript"></script>
     <script src="lib/dragndrop.js" type="text/javascript"></script>
@@ -12,10 +12,10 @@
 <body ng-controller="todolistController" keypress-events>
 <div class="board" ng-click="createTodo($event)" on-drop="moveTodo" drop-area>
     <div ng-repeat="t in todos track by $index" ng-click="$event.stopPropagation()" id="{{t.id}}" class="item todo" ng-class="{urgent: t.today}" style="{{t.pos}}" drag-item>
-        <label><input type="checkbox" ng-model="t.today" ng-change="save()">due today</label>
+        <label><input type="checkbox" ng-model="t.today">due today</label>
         <input class="done" type="button" ng-click="deleteTodo(t.id); $event.stopPropagation()" value="done">
         <hr>
-        <textarea ng-model="t.description" ng-change="save()" ng-required="true"></textarea>
+        <textarea ng-model="t.description" ng-required="true"></textarea>
     </div>
 </div>
 </body>
