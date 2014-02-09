@@ -9,12 +9,13 @@ var Todo = (function () {
     return Todo;
 })();
 
-var app = angular.module('todolist', ['dragndrop']);
+angular.module('todolist', ['dragndrop']);
 
-app.controller("todolistController", [
+angular.module('todolist').controller("todolistController", [
     '$scope',
+    '$location',
     'localStorageService',
-    function ($scope, localStorageService) {
+    function ($scope, $location, localStorageService) {
         $scope.todos = localStorageService.loadTodos();
 
         $scope.$watch('todos', function (newValue) {
@@ -49,7 +50,7 @@ app.controller("todolistController", [
     }
 ]);
 
-app.service("localStorageService", function () {
+angular.module('todolist').service("localStorageService", function () {
     return {
         loadTodos: function () {
             var json = localStorage.getItem("todos");

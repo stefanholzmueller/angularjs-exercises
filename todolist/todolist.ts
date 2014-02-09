@@ -12,9 +12,9 @@ class Todo {
 	}
 }
 
-var app = angular.module('todolist', [ 'dragndrop' ]);
+angular.module('todolist', [ 'dragndrop' ]);
 
-app.controller("todolistController", [ '$scope', 'localStorageService', function ($scope, localStorageService) {
+angular.module('todolist').controller("todolistController", [ '$scope', '$location', 'localStorageService', function ($scope, $location, localStorageService) {
 	$scope.todos = localStorageService.loadTodos();
 
 	$scope.$watch('todos', function(newValue) {
@@ -42,7 +42,7 @@ app.controller("todolistController", [ '$scope', 'localStorageService', function
 	};
 }]);
 
-app.service("localStorageService", function () {
+angular.module('todolist').service("localStorageService", function () {
 	return {
 		loadTodos: function () : Array<Todo> {
 			var json = localStorage.getItem("todos");
