@@ -17,6 +17,7 @@
         <hr>
         <textarea ng-model="t.description" ng-required="true"></textarea>
     </div>
+    <a download="todolist.json" ng-click="$event.stopPropagation()" ng-href="data:application/json;charset=UTF-8;base64,{{backup}}">backup</a>
 </div>
 </body>
 </html>

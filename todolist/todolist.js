@@ -11,12 +11,21 @@ var Todo = (function () {
 
 angular.module('todolist', ['dragndrop']);
 
+angular.module('todolist').config([
+    '$compileProvider',
+    function ($compileProvider) {
+        $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|data):/);
+    }
+]);
+
 angular.module('todolist').controller("todolistController", [
     '$scope',
     '$location',
     'localStorageService',
     function ($scope, $location, localStorageService) {
         $scope.todos = localStorageService.loadTodos();
+
+        $scope.backup = btoa(localStorageService.loadJson());
 
         $scope.$watch('todos', function (newValue) {
             localStorageService.saveTodos(newValue);
@@ -52,8 +61,11 @@ angular.module('todolist').controller("todolistController", [
 
 angular.module('todolist').service("localStorageService", function () {
     return {
+        loadJson: function () {
+            return localStorage.getItem("todos");
+        },
         loadTodos: function () {
-            var json = localStorage.getItem("todos");
+            var json = this.loadJson();
             return angular.fromJson(json) || [];
         },
         saveTodos: function (todos) {
