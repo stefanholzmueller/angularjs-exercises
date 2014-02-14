@@ -58,18 +58,16 @@ angular.module('todolist').controller("todolistController", [
 ]);
 
 angular.module('todolist').service("localStorageService", function () {
-    return {
-        loadJson: function () {
-            return localStorage.getItem("todos");
-        },
-        loadTodos: function () {
-            var json = this.loadJson();
-            return angular.fromJson(json) || [];
-        },
-        saveTodos: function (todos) {
-            var json = angular.toJson(todos);
-            localStorage.setItem("todos", json);
-        }
+    this.loadJson = function () {
+        return localStorage.getItem("todos");
+    };
+    this.loadTodos = function () {
+        var json = this.loadJson();
+        return angular.fromJson(json) || [];
+    };
+    this.saveTodos = function (todos) {
+        var json = angular.toJson(todos);
+        localStorage.setItem("todos", json);
     };
 });
 //# sourceMappingURL=todolist.js.map

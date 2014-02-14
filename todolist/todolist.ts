@@ -47,17 +47,17 @@ angular.module('todolist').controller("todolistController", [ '$scope', '$locati
 }]);
 
 angular.module('todolist').service("localStorageService", function () {
-	return {
-		loadJson: function () : string {
-			return localStorage.getItem("todos");
-		},
-		loadTodos: function () : Array<Todo> {
-			var json = this.loadJson();
-			return angular.fromJson(json) || [];
-		},
-		saveTodos: function (todos : Array<Todo>) {
-			var json = angular.toJson(todos);
-			localStorage.setItem("todos", json);
-		}
+
+	this.loadJson = function () : string {
+		return localStorage.getItem("todos");
 	};
+	this.loadTodos = function () : Array<Todo> {
+		var json = this.loadJson();
+		return angular.fromJson(json) || [];
+	};
+	this.saveTodos = function (todos : Array<Todo>) {
+		var json = angular.toJson(todos);
+		localStorage.setItem("todos", json);
+	};
+
 });
