@@ -6,12 +6,6 @@ angular.module('dragndrop').directive('dragItem', function () {
 
         el.draggable = true;
 
-        var userFnName = attrs['onInit'];
-        if (userFnName) {
-            var userFn = scope[userFnName];
-            userFn(el, element.parent()[0]);
-        }
-
         el.addEventListener('dragstart', function (e) {
             var style = window.getComputedStyle(e.target, null);
             var payload = JSON.stringify({
@@ -58,8 +52,8 @@ angular.module('dragndrop').directive('dropArea', ['util', function (util) {
 
                 var payload = JSON.parse(e.dataTransfer.getData('text'));
 
-                util.callbackInScope(scope, attrs['onDrop'], function (callback) {
-                    var id = document.getElementById(payload.id).id;
+                util.callbackInScope(scope, attrs, 'onDrop', function (callback) {
+                    var id = payload.id;
                     var x = e.clientX + parseInt(payload.dragX, 10);
                     var y = e.clientY + parseInt(payload.dragY, 10);
                     callback(id, x, y);
@@ -70,7 +64,7 @@ angular.module('dragndrop').directive('dropArea', ['util', function (util) {
 
             el.addEventListener('click', function (e) {
                 if (e.srcElement == el) {
-                    util.callbackInScope(scope, attrs['onClick'], function (callback) {
+                    util.callbackInScope(scope, attrs, 'onClick', function (callback) {
                         var x = e.offsetX == undefined ? e.layerX : e.offsetX;
                         var y = e.offsetY == undefined ? e.layerY : e.offsetY;
                         callback(x, y);
@@ -84,13 +78,16 @@ angular.module('dragndrop').directive('dropArea', ['util', function (util) {
 
 angular.module('dragndrop').factory('util', function () {
     return {
-        callbackInScope: function (scope, callbackName, fn) {
+        callbackInScope: function (scope, attrs, hookName, fn) {
             scope.$apply(function () {
-                var callback = scope[callbackName];
-                if (callback) {
-                    fn(callback);
-                } else {
-                    throw new Error("no callback found");
+                var callbackName = attrs[hookName];
+                if (callbackName) {
+                    var callback = scope[callbackName];
+                    if (callback) {
+                        fn(callback);
+                    } else {
+                        throw new Error("callback " + callbackName + " not found for hook " + hookName);
+                    }
                 }
             });
         }
