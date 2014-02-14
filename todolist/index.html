@@ -10,14 +10,14 @@
     <link href="index.css" rel="stylesheet" type="text/css"/>
 </head>
 <body ng-controller="todolistController" keypress-events>
-<div class="board" ng-click="createTodo($event)" on-drop="moveTodo" drop-area>
-    <div ng-repeat="t in todos track by $index" ng-click="$event.stopPropagation()" id="{{t.id}}" class="item todo" ng-class="{urgent: t.today}" style="{{t.pos}}" drag-item>
+<div class="board" on-click="createTodo" on-drop="moveTodo" drop-area>
+    <div ng-repeat="t in todos track by $index" id="{{t.id}}" class="item todo" ng-class="{urgent: t.today}" style="{{t.pos}}" drag-item>
         <label><input type="checkbox" ng-model="t.today">due today</label>
-        <input class="done" type="button" ng-click="deleteTodo(t.id); $event.stopPropagation()" value="done">
+        <input class="done" type="button" ng-click="deleteTodo(t.id)" value="done">
         <hr>
         <textarea ng-model="t.description" ng-required="true"></textarea>
     </div>
-    <a download="todolist.json" ng-click="$event.stopPropagation()" ng-href="data:application/json;charset=UTF-8;base64,{{backup}}">backup</a>
+    <a download="todolist.json" ng-href="data:application/json;charset=UTF-8;base64,{{backup}}">backup</a>
 </div>
 </body>
 </html>

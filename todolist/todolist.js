@@ -38,9 +38,7 @@ angular.module('todolist').controller("todolistController", [
             return _.isFinite(maxId) ? maxId + 1 : 1;
         };
 
-        $scope.createTodo = function ($event) {
-            var x = $event.offsetX == undefined ? $event.layerX : $event.offsetX;
-            var y = $event.offsetY == undefined ? $event.layerY : $event.offsetY;
+        $scope.createTodo = function (x, y) {
             $scope.todos.push({ id: nextId(), description: "", today: false, pos: Todo.coords2pos(x, y) });
         };
 
