@@ -42,9 +42,9 @@ angular.module('todolist').controller("todolistController", [
             $scope.todos.push({ id: nextId(), description: "", today: false, pos: Todo.coords2pos(x, y) });
         };
 
-        $scope.moveTodo = function (area, el, x, y) {
+        $scope.moveTodo = function (id, x, y) {
             var todo = _.find($scope.todos, function (t) {
-                return t.id == el.id;
+                return t.id == id;
             });
             todo.pos = Todo.coords2pos(x, y);
         };

@@ -58,17 +58,11 @@ angular.module('dragndrop').directive('dropArea', ['util', function (util) {
 
                 var payload = JSON.parse(e.dataTransfer.getData('text'));
 
-                var args = {
-                    area: this,
-                    item: document.getElementById(payload.id),
-                    x: (e.clientX + parseInt(payload.dragX, 10)),
-                    y: (e.clientY + parseInt(payload.dragY, 10))
-                };
-
-                scope.$apply(function (scope) {
-                    var userFnName = attrs['onDrop'];
-                    var userFn = scope[userFnName];
-                    userFn(args.area, args.item, args.x, args.y);
+                util.callbackInScope(scope, attrs['onDrop'], function (callback) {
+                    var id = document.getElementById(payload.id).id;
+                    var x = e.clientX + parseInt(payload.dragX, 10);
+                    var y = e.clientY + parseInt(payload.dragY, 10);
+                    callback(id, x, y);
                 });
 
                 return false;

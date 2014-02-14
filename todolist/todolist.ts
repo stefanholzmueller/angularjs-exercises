@@ -36,8 +36,8 @@ angular.module('todolist').controller("todolistController", [ '$scope', '$locati
 		$scope.todos.push({id: nextId(), description: "", today: false, pos: Todo.coords2pos(x, y)});
 	};
 
-	$scope.moveTodo = function (area, el, x, y) {
-		var todo : Todo = _.find($scope.todos, t => t.id == el.id); // type coercion!
+	$scope.moveTodo = function (id, x, y) {
+		var todo : Todo = _.find($scope.todos, t => t.id == id); // type coercion!
 		todo.pos = Todo.coords2pos(x, y);
 	};
 
