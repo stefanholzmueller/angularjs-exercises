@@ -1,6 +1,6 @@
-var module = angular.module('dragndrop', []);
+angular.module('dragndrop', []);
 
-module.directive('dragItem', function () {
+angular.module('dragndrop').directive('dragItem', function () {
     return function (scope, element, attrs) {
         var el = element[0];
 
@@ -34,7 +34,7 @@ module.directive('dragItem', function () {
     };
 });
 
-module.directive('dropArea', function () {
+angular.module('dragndrop').directive('dropArea', ['util', function (util) {
     return {
         link: function (scope, element, attrs) {
             var el = element[0];
@@ -76,18 +76,29 @@ module.directive('dropArea', function () {
 
             el.addEventListener('click', function (e) {
                 if (e.srcElement == el) {
-                    scope.$apply(function (scope) {
-                        var userFnName = attrs['onClick'];
-                        var userFn = scope[userFnName];
-
+                    util.callbackInScope(scope, attrs['onClick'], function (callback) {
                         var x = e.offsetX == undefined ? e.layerX : e.offsetX;
                         var y = e.offsetY == undefined ? e.layerY : e.offsetY;
-
-                        userFn(x, y);
+                        callback(x, y);
                     });
                 }
                 return false;
             }, false);
+        }
+    };
+}]);
+
+angular.module('dragndrop').factory('util', function () {
+    return {
+        callbackInScope: function (scope, callbackName, fn) {
+            scope.$apply(function () {
+                var callback = scope[callbackName];
+                if (callback) {
+                    fn(callback);
+                } else {
+                    throw new Error("no callback found");
+                }
+            });
         }
     };
 });
